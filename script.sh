@@ -27,8 +27,11 @@ apt-get install -y libpam-cracklib
 
 
 cp ./common-password /etc/pam.d/common-password
-cp ./common-auth /etc/pam.d/common-auth
-#cp ./login.defs /etc/
+# Common-auth sets lockout policy, currently broken in this script
+# Newer versions of debian/ubuntu use pam_faillock.so while older ones use pam_tally2.so
+# Just do this part by hand
+#cp ./common-auth /etc/pam.d/common-auth
+cp ./login.defs /etc/
 apt-get install -y gufw
 ufw enable
 sysctl -n net.ipv4.tcp_syncookies
