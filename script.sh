@@ -22,8 +22,12 @@ fi
 apt-get install -y unattended-upgrades
 dpkg-reconfigure unattended-upgrades
 
-#cp ./common-password /etc/pam.d/common-password
-#cp ./common-auth /etc/pam.d/common-auth
+#pam dependencies
+apt-get install -y libpam-cracklib
+
+
+cp ./common-password /etc/pam.d/common-password
+cp ./common-auth /etc/pam.d/common-auth
 #cp ./login.defs /etc/
 apt-get install -y gufw
 ufw enable
@@ -220,6 +224,9 @@ chmod 600 /etc/sysctl.conf
 chmod 755 /etc
 chmod 755 /bin/su
 chmod 755 /bin/bash
+chmod u+s /bin/sudo
+chmod u+s /bin/su
+chmod u+s /sbin/unix_chkpwd
 chmod 755 /sbin/ifconfig
 chmod 666 /dev/null /dev/tty /dev/console
 chmod 600 /boot/grub/grub.cfg
